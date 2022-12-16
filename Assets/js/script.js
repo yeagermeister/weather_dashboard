@@ -2,6 +2,14 @@ var userFormEl = document.querySelector("#user-form");
 var cityInputEl = document.querySelector("#cityInput");
 var cityListEl = document.querySelector("#city-list");
 
+// Current weather Elements
+var cityEl = $("#city");
+var icon0El = $("#icon0");
+var tempEl = $("#temp");
+var windEl = $("#wind");
+var humidityEl = $("#humidity");
+
+
 // var languageButtonsEl = document.querySelector("#language-buttons");
 
 var repoContainerEl = document.querySelector("#repos-container");
@@ -39,19 +47,20 @@ var getGeocode = function() {
 				return response.json();
 			}
 		})
+	
 		.then(function (data) {
+			// console.log(data);
 			lon = data[0].lon;
 			lat = data[0].lat;
-			// var weatherLocation = [lat, lon];
 			var savedLocation = [city, lat, lon];
 			localStorage.setItem("wddata", JSON.stringify(savedLocation));
-			getWeather(savedLocation);
+			getWeather();
 		});
 
 };
 
 var getWeather = function () {
-	var apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + openWeatherAPIKey;
+	var apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + openWeatherAPIKey +"&units=imperial";
 
 	fetch(apiUrl)
 		.then(function (response) {
@@ -59,6 +68,25 @@ var getWeather = function () {
 				console.log(response);
 				response.json().then(function (data) {
 					console.log(data);
+					humidity = data.main.humidity;
+					temp = data.main.temp;
+					wind = data.wind.speed;
+					icon = data.weather[0].icon
+					iconurl = "http://openweathermap.org/img/w/" + icon + ".png";
+					// console.log(humidity);
+					// console.log(temp);
+					// console.log(wind);
+					// console.log(icon);
+					// console.log(city);
+
+					$('#city').text(city);
+					$('#icon0').attr('src', iconurl);
+					$('#wind').text('Wind: ' + wind + ' MPH');
+					$('#temp').text('Temp: ' + temp + ' &degF');
+					$('#humidity').text('Humidity: ' + humidity + "%");
+					console.log('scr="' + iconurl + '"');
+
+
 					// displayRepos(data, user);
 				});
 			} else {
@@ -68,21 +96,23 @@ var getWeather = function () {
 		.catch(function (error) {
 			alert("Unable to connect to OpenWeather");
 		});
+
+	
 };
 
 var getSavedLocations = function () {
 	var storedLocations = JSON.parse(localStorage.getItem("wddata"))
-	console.log(storedLocations);
-	console.log(storedLocations.length)
+	// console.log(storedLocations);
+	// console.log(storedLocations.length)
 	if (storedLocations) {
 		for (var i = 0; i < storedLocations.length; i++) {
 			var location = storedLocations[i];
 			var tempCity = location[0];
 			lat = location[1];
 			lon = location[2];
-			console.log(tempCity);
-			console.log(lat);
-			console.log(lon);
+			// console.log(tempCity);
+			// console.log(lat);
+			// console.log(lon);
 
 
 			var li = document.createElement("li");

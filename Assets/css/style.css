@@ -1,3 +1,19 @@
 .gradient-custom {
     background: linear-gradient(to right, rgba(168, 182, 240, 0.5), rgba(44, 11, 77, 0.5))
-  }
+}
+
+.myButton {
+  border-radius: 8px;
+  border: none;
+  width: 100%;
+}
+
+.searchButton {
+  color: rgba(225, 224, 224, 0.812);
+  background-color: rgb(105, 156, 233);
+}
+
+.cityButton {
+  color: white;
+  background-color: rgb(105, 156, 233);
+}

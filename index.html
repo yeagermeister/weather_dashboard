@@ -22,54 +22,50 @@
         <main>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-3">
-                        <!-- <form>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Search for a city:</label>
-                                <input type="text" class="form-control" id="cityInput" aria-describedby="cityInput">
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="btnSubmit">Search</button>
-                        </form> -->
-                        <form id="user-form" class="mb-3">
-                            <label class="form-label" for="username">
-                                <h2>Search for a city:</h2>
-                            </label>
-                            <input
-                                name="city"
-                                id="cityInput"
-                                type="text"
-                                autofocus="true"
-                                class="form-control mb-3"
-                            />
+                    <div id="cityArea" class="col-2 mb-3" >
+                        <h2>Search for a city:</h2>
+                        <form id="searchForm" class="myBorder mb-3">
+                            <input id="cityInput" type="text" autofocus="true" class="form-control mb-3"/>
                             <button type="submit" class="myButton searchButton">Search</button>
                         </form>
-						<ul id="city-list">
-						</ul>
+                        <button id="city-0" class="d-none myButton cityButton"></button>
+                        <button id="city-1" class="d-none myButton cityButton"></button>
+                        <button id="city-2" class="d-none myButton cityButton"></button>
+                        <button id="city-3" class="d-none myButton cityButton"></button>
+                        <button id="city-4" class="d-none myButton cityButton"></button>
+                        <button id="city-5" class="d-none myButton cityButton"></button>
+                        <button id="city-6" class="d-none myButton cityButton"></button>
+                        <button id="city-7" class="d-none myButton cityButton"></button>
+                        <button id="city-8" class="d-none myButton cityButton"></button>
+                        <button id="city-9" class="d-none myButton cityButton"></button>
+                        <button id="city-10" class="d-none myButton cityButton"></button>
+                        <button id="city-11" class="d-none myButton cityButton"></button>
                     </div>
                     <div class="col-9">
-                        <div class="row">
-                            <div class="col-12 col-sm-6 container border border-dark w-100 text-start">
-                                <div class="row">
-                                    <h2 id="city"></h2>
-                                    <img class="container" id="icon0"></img>
+                        <div class="row mb-3">
+                            <div class="col-12 col-sm-6">
+                                <div class="row border border-dark text start">
+                                    <h2 id="city">city name <span id="icon0" class="float-none"></span></h2>
+                                    <ul>
+                                        <li>Temp: <span id="temp"></span> &deg;F</li>
+                                        <li>Wind: <span id="wind"></span> MPH</li>
+                                        <li>Humidity: <span id="humidity"></span> &percnt;</li>
+                                    </ul>
                                 </div>
-                                <p id="temp"></p>
-                                <p id="wind"></p>
-                                <p id="humidity"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-sm-6 container border border-dark w-100 text-start">
-                                5 day forecast
-                            </div>
-                        </div>
+                                <h3 class="row">5-Day Forecast:</h3>
+                                <div class="row">
+                                    <div id="day-0"></div>
+                                    <div id="day-1"></div>
+                                    <div id="day-2"></div>
+                                    <div id="day-3"></div>
+                                    <div id="day-4"></div>
+                                </div>
                     </div>
                     
                 </div>
             </div>
 
         </main>
-        <img id="icon0" src="https://openweathermap.org/img/w/04d.png"></img>
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
         <script src="./Assets/js/script.js"></script>
     </body>

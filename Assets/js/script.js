@@ -1,3 +1,4 @@
+// Aside Elements
 var userFormEl = document.querySelector("#user-form");
 var cityInputEl = document.querySelector("#cityInput");
 var cityListEl = document.querySelector("#city-list");
@@ -9,14 +10,7 @@ var tempEl = $("#temp");
 var windEl = $("#wind");
 var humidityEl = $("#humidity");
 
-
-// var languageButtonsEl = document.querySelector("#language-buttons");
-
-var repoContainerEl = document.querySelector("#repos-container");
-var repoSearchTerm = document.querySelector("#repo-search-term");
-
-
-
+// Weather Variables
 var openWeatherAPIKey = "ac202244dda6e740100cc79c2e5b8ee8";
 var city
 var lat;
@@ -33,6 +27,7 @@ var formSubmitHandler = function (event) {
 	if (city) {
 		getGeocode(city);
 		cityInputEl.value = "";
+		cityInputEl.attr("city", city);
 	} else {
 		alert("Please enter a city");
 	}
@@ -55,39 +50,34 @@ var getGeocode = function() {
 			var savedLocation = [city, lat, lon];
 			localStorage.setItem("wddata", JSON.stringify(savedLocation));
 			getWeather();
+			getForecast();
 		});
 
 };
 
 var getWeather = function () {
-	var apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=" + openWeatherAPIKey +"&units=imperial";
+	var apiUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + lat + "&lon=" + lon + "&cnt=5&appid=" + openWeatherAPIKey +"&units=imperial";
 
 	fetch(apiUrl)
 		.then(function (response) {
 			if (response.ok) {
-				console.log(response);
+				// console.log(response);
 				response.json().then(function (data) {
-					console.log(data);
-					humidity = data.main.humidity;
-					temp = data.main.temp;
-					wind = data.wind.speed;
-					icon = data.weather[0].icon
+					// console.log(data);
+					humidity = data.current.humidity;
+					temp = data.current.temp;
+					wind = data.current.wind_speed;
+					icon = data.current.weather[0].icon;
 					iconurl = "http://openweathermap.org/img/w/" + icon + ".png";
-					// console.log(humidity);
-					// console.log(temp);
-					// console.log(wind);
-					// console.log(icon);
-					// console.log(city);
 
 					$('#city').text(city);
 					$('#icon0').attr('src', iconurl);
 					$('#wind').text('Wind: ' + wind + ' MPH');
 					$('#temp').text('Temp: ' + temp + ' &degF');
 					$('#humidity').text('Humidity: ' + humidity + "%");
-					console.log('scr="' + iconurl + '"');
-
-
-					// displayRepos(data, user);
+					// console.log('scr="' + iconurl + '"');
+// Still need to fix where the icon is displyed
+// And get the data displayed next to the City Name
 				});
 			} else {
 				alert("Error: " + response.statusText);
@@ -100,19 +90,49 @@ var getWeather = function () {
 	
 };
 
+var getForecast = function () {
+	var apiUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + openWeatherAPIKey +"&units=imperial";
+
+	fetch(apiUrl)
+		.then(function (response) {
+			if (response.ok) {
+				console.log(response);
+				response.json().then(function (data) {
+					console.log(data);
+
+					for (i = 1; i < 6; i++) {
+					humidity = data.daily[i].humidity;
+					temp = data.daily[i].temp[0];
+					wind = data.daily[i].wind_speed;
+					icon = data.daily[i].weather[0].icon
+					iconurl = "http://openweathermap.org/img/w/" + icon + ".png";
+					time = data.daily[i].dt;
+					// console.log(time);
+					}
+
+// Still need to fix where the icon is displyed
+// And get the data displayed next to the City Name
+// Can the icon be a badge?  bootstrap
+				});
+			} else {
+				alert("Error: " + response.statusText);
+			}
+		})
+		.catch(function (error) {
+			alert("Unable to connect to OpenWeather");
+		});
+};
+
 var getSavedLocations = function () {
 	var storedLocations = JSON.parse(localStorage.getItem("wddata"))
-	// console.log(storedLocations);
-	// console.log(storedLocations.length)
+	console.log(storedLocations);
 	if (storedLocations) {
 		for (var i = 0; i < storedLocations.length; i++) {
 			var location = storedLocations[i];
 			var tempCity = location[0];
 			lat = location[1];
 			lon = location[2];
-			// console.log(tempCity);
-			// console.log(lat);
-			// console.log(lon);
+
 
 
 			var li = document.createElement("li");

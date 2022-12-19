@@ -1,3 +1,8 @@
+ul {
+  list-style: none;
+}
+
+
 .gradient-custom {
     background: linear-gradient(to right, rgba(168, 182, 240, 0.5), rgba(44, 11, 77, 0.5))
 }
@@ -11,9 +16,15 @@
 .searchButton {
   color: rgba(225, 224, 224, 0.812);
   background-color: rgb(105, 156, 233);
+  margin-bottom: 5px;
 }
 
 .cityButton {
-  color: white;
-  background-color: rgb(105, 156, 233);
+  color: black;
+  background-color: grey;
+  font-weight: 500;
+}
+
+.myBorder {
+  border-bottom: 2px solid grey;
 }

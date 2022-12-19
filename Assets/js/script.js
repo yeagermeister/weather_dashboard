@@ -79,16 +79,13 @@ var getWeather = function (city, lat, lon) {
 					temp = data.current.temp;
 					wind = data.current.wind_speed;
 					icon = data.current.weather[0].icon;
-					iconurl = "http://openweathermap.org/img/w/" + icon + ".png";
-
+					iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+					iconEl = '<img src="' + iconUrl + '" alt="weather condition icon">'
 					$('#city').text(city);
-					$('#icon0').attr('src', iconurl);
-					$('#wind').text('Wind: ' + wind + ' MPH');
-					$('#temp').text('Temp: ' + temp + ' &degF');
-					$('#humidity').text('Humidity: ' + humidity + "%");
-					// console.log('scr="' + iconurl + '"');
-// Still need to fix where the icon is displyed
-// And get the data displayed next to the City Name
+					$('#icon0').append(iconEl);
+					$('#wind').text(wind);
+					$('#temp').text(temp);
+					$('#humidity').text(humidity);
 				});
 			} else {
 				alert("Error: " + response.statusText);

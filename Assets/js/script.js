@@ -18,6 +18,7 @@ function init() {
 	}
 };
 
+//writes saved cities buttons  
 function writeCities(citylist) {
     for (i = 0; i < citylist.length; i++) {
         var element = "#city-" + i;
@@ -42,6 +43,8 @@ var formSubmitHandler = function(event) {
 
 };
 
+// Get the latitude and longitude for the requested city.  We also get the correct city name, incase the user had typos.  
+// The info is saved to local storage, so we dont have to keep hitting the geolocation api.
 function getGeocode(city) {
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + openWeatherAPIKey;
 
@@ -74,7 +77,10 @@ var getWeather = function (city, lat, lon) {
 		.then(function (response) {
 			if (response.ok) {
 				response.json().then(function (data) {
+					// get today's date
 					today = dayjs().format('M/D/YYYY')
+
+					// get and fill in the current weather
 					humidity = data.current.humidity;
 					temp = data.current.temp;
 					wind = data.current.wind_speed;
@@ -87,6 +93,7 @@ var getWeather = function (city, lat, lon) {
 					$('#temp').text(temp);
 					$('#humidity').text(humidity);
 
+					// get and fill in the 5 day forecast
 					for (i = 1; i < 6; i++) {
 						result = dayjs().add(i, 'day').format('M/D/YYYY');
 						humidityd = data.daily[i].humidity;
@@ -102,6 +109,7 @@ var getWeather = function (city, lat, lon) {
 						var dateEl = document.createElement('p');
 						dateEl.textContent = result;
 						
+						// I like having the bigger iocn here, so I'm not styling it to be small like the one in the current weather
 						var iconEld = document.createElement('img');
 						iconEld.setAttribute("src", iconUrld)
 						iconEld.setAttribute("alt", "weather condition icon")
@@ -143,7 +151,7 @@ formEl.addEventListener("submit", formSubmitHandler);
 cityAreaEl.addEventListener('click', function(event) {
 	var element = event.target;
 
-	if (element.matches("button") === true) {
+	if (element.matches("button")) {		
 		var index = element.getAttribute("id");
 		var selection = index.slice(-1);
 		locdata = JSON.parse(localStorage.getItem("wddata"));
@@ -161,9 +169,12 @@ cityAreaEl.addEventListener('click', function(event) {
 		element.forEach(icon => {
 			icon.remove();
 		});
+		getWeather(city, lat, lon);
+	} else {
+		console.log("nothing");
 	}
-	
-	getWeather(city, lat, lon);
+
+
 });
 
 init();

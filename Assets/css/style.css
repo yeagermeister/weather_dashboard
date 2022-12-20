@@ -1,12 +1,15 @@
+/* element styles */
 ul {
   list-style: none;
 }
 
-
+/* header styles */
 .gradient-custom {
     background: linear-gradient(to right, rgba(168, 182, 240, 0.5), rgba(44, 11, 77, 0.5))
 }
 
+
+/* custom button styles */
 .myButton {
   border-radius: 8px;
   border: none;
@@ -25,10 +28,13 @@ ul {
   font-weight: 500;
 }
 
+
+/* bottom border for the form - seperates the from from the saved cities  */
 .myBorder {
   border-bottom: 2px solid grey;
 }
 
+/* cards for the 5day forecast */
 .mycard {
   width: 18%;
   background-color: rgb(12, 7, 57);
@@ -36,4 +42,5 @@ ul {
   color: white;
 }
 
+/*Still need to add breakpoints */
 

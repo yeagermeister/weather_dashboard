@@ -46,7 +46,7 @@ var formSubmitHandler = function(event) {
 // Get the latitude and longitude for the requested city.  We also get the correct city name, incase the user had typos.  
 // The info is saved to local storage, so we dont have to keep hitting the geolocation api.
 function getGeocode(city) {
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + openWeatherAPIKey;
+    var apiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + openWeatherAPIKey;
 
 	fetch(apiUrl)
 		.then(function (response) {
@@ -170,11 +170,7 @@ cityAreaEl.addEventListener('click', function(event) {
 			icon.remove();
 		});
 		getWeather(city, lat, lon);
-	} else {
-		console.log("nothing");
-	}
-
-
+	} 
 });
 
 init();

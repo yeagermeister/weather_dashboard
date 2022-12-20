@@ -3,7 +3,7 @@
 This app a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
 
 ## Image of the app
-![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/images/05-third-party-apis-homework-demo.gif)
+![A user can click on a saved city and get the current weather and 5 day forecast](./Assets/images/screenshot.png)
 
 ## Link to app
 

@@ -43,4 +43,25 @@ ul {
 }
 
 /*Still need to add breakpoints */
+@media screen and (max-width: 768px) {
+  .mycard {
+    width: 98%;
+  }
 
+  .screen-sm {
+    margin-left: 10%;
+  }
+
+  .icon-sm {
+    height: 50px;
+    width: 50px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .hidden-sm{
+    visibility: hidden;
+  }
+}

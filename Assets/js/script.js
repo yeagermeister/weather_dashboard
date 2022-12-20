@@ -87,7 +87,7 @@ var getWeather = function (city, lat, lon) {
 					icon = data.current.weather[0].icon;
 					iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
 					iconEl = '<img src="' + iconUrl + '" alt="weather condition icon" id="icon">'
-					$('#city').text(city + "(" + today + ")");
+					$('#city').text(city + " (" + today + ")");
 					$('#icon0').append(iconEl);
 					$('#wind').text(wind);
 					$('#temp').text(temp);
@@ -109,10 +109,10 @@ var getWeather = function (city, lat, lon) {
 						var dateEl = document.createElement('p');
 						dateEl.textContent = result;
 						
-						// I like having the bigger iocn here, so I'm not styling it to be small like the one in the current weather
 						var iconEld = document.createElement('img');
 						iconEld.setAttribute("src", iconUrld)
 						iconEld.setAttribute("alt", "weather condition icon")
+						iconEld.classList ="icon-sm"
 
 						var tempEld = document.createElement('p');
 						tempEld.setAttribute("id", "temp-" + i);

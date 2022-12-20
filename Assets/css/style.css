@@ -28,3 +28,12 @@ ul {
 .myBorder {
   border-bottom: 2px solid grey;
 }
+
+.mycard {
+  width: 18%;
+  background-color: rgb(12, 7, 57);
+  margin: 1%;
+  color: white;
+}
+
+

@@ -1,5 +1,7 @@
-var formEl = document.querySelector("#searchForm");
-var inputEl = document.querySelector("#cityInput");
+var formEl = document.querySelector('#searchForm');
+var inputEl = document.querySelector('#cityInput');
+var cityAreaEl = document.querySelector('#cityArea');
+var forecastEl = document.querySelector('#forecast');
 
 var openWeatherAPIKey = "ac202244dda6e740100cc79c2e5b8ee8";
 
@@ -8,7 +10,8 @@ function init() {
     if (citylist !== null ) {
 		writeCities(citylist);
 		console.log(citylist.length);
-		citydata = citylist[2];
+		i = citylist.length - 1
+		citydata = citylist[i];
 		console.log(citydata);
 		city = citydata[0];
 		lat = citydata[1];
@@ -64,8 +67,6 @@ function getGeocode(city) {
 			localStorage.setItem("wddata", JSON.stringify(locdata));
 			location.reload();
 		})
-
-
 };
 
 var getWeather = function (city, lat, lon) {
@@ -75,6 +76,7 @@ var getWeather = function (city, lat, lon) {
 		.then(function (response) {
 			if (response.ok) {
 				response.json().then(function (data) {
+					console.log(data);
 					humidity = data.current.humidity;
 					temp = data.current.temp;
 					wind = data.current.wind_speed;
@@ -86,6 +88,41 @@ var getWeather = function (city, lat, lon) {
 					$('#wind').text(wind);
 					$('#temp').text(temp);
 					$('#humidity').text(humidity);
+
+					for (i = 1; i < 6; i++) {
+						humidityd = data.daily[i].humidity;
+						tempd = data.daily[i].temp.max;
+						windd = data.daily[i].wind_speed;
+						icond = data.daily[i].weather[0].icon;
+						iconUrld = "http://openweathermap.org/img/w/" + icond + ".png";
+
+						var cardEl = document.createElement('div');
+						cardEl.classList = "card mycard";
+						cardEl.setAttribute("id", "day-" + i);
+						
+						// var dateEl = 
+						var iconEld = document.createElement('img');
+						iconEld.setAttribute("src", iconUrld)
+						iconEld.setAttribute("alt", "weather condition icon")
+
+						var tempEld = document.createElement('p');
+						tempEld.setAttribute("id", "temp-" + i);
+						tempEld.textContent = "Temp: " + tempd + " \u00B0F";
+
+						var windEld = document.createElement("p");
+						windEld.setAttribute("id", "wind-" + i);
+						windEld.textContent = "Wind: " + windd + " MPH";
+
+						var humidityEld = document.createElement("p");
+						humidityEld.setAttribute("id", "humidity-" + i);
+						humidityEld.textContent = "Humidity: " + humidityd + " %;";
+
+						forecastEl.appendChild(cardEl);
+						cardEl.appendChild(iconEld);
+						cardEl.appendChild(tempEld);
+						cardEl.appendChild(windEld);
+						cardEl.appendChild(humidityEld);
+					}
 				});
 			} else {
 				alert("Error: " + response.statusText);
@@ -95,10 +132,12 @@ var getWeather = function (city, lat, lon) {
 			alert("Unable to connect to OpenWeather");
 		});
 
-	
 };
 
-
+// event listener for the search
 formEl.addEventListener("submit", formSubmitHandler);
+
+// event listener for clicking on a city
+// cityAreaEl.addEventListener('click', '.cityButton', getWeather);
 
 init();

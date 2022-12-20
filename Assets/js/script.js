@@ -85,7 +85,7 @@ var getWeather = function (city, lat, lon) {
 					temp = data.current.temp;
 					wind = data.current.wind_speed;
 					icon = data.current.weather[0].icon;
-					iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+					iconUrl = "https://openweathermap.org/img/w/" + icon + ".png";
 					iconEl = '<img src="' + iconUrl + '" alt="weather condition icon" id="icon">'
 					$('#city').text(city + " (" + today + ")");
 					$('#icon0').append(iconEl);
@@ -100,7 +100,7 @@ var getWeather = function (city, lat, lon) {
 						tempd = data.daily[i].temp.max;
 						windd = data.daily[i].wind_speed;
 						icond = data.daily[i].weather[0].icon;
-						iconUrld = "http://openweathermap.org/img/w/" + icond + ".png";
+						iconUrld = "https://openweathermap.org/img/w/" + icond + ".png";
 
 						var cardEl = document.createElement('div');
 						cardEl.classList = "card mycard";

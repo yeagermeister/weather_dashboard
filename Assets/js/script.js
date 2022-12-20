@@ -34,7 +34,7 @@ var formSubmitHandler = function(event) {
 
     var city = inputEl.value.trim();
     if (city) {
-        // getGeocode(city);
+        getGeocode(city);
     } else {
 		alert("Please enter a city");
 	}

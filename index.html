@@ -11,6 +11,11 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous"
         />
+        <script
+        src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+        crossorigin="anonymous"
+        ></script>
         <link rel="stylesheet" href="./Assets/css/style.css">
     </head>
 
@@ -25,7 +30,7 @@
                         <h2>Search for a city:</h2>
                         <form id="searchForm" class="myBorder mb-3">
                             <input id="cityInput" type="text" autofocus="true" class="form-control mb-3"/>
-                            <button type="submit" class="myButton searchButton">Search</button>
+                            <button type="submit" class="mb-3 myButton searchButton">Search</button>
                         </form>
                         <button id="city-0" class="d-none"></button>
                         <button id="city-1" class="d-none"></button>
@@ -55,46 +60,10 @@
                                     </ul>
                                 </div>
                                 <h3 class="row">5-Day Forecast:</h3>
-                                <div class="row w-100" id="forecast">
-<!-- 
-                                    <div id="day-1" class="card mycard">
-                                        <p id="date-1"></p>
-                                        <span id="icon-1"></span>
-                                        <p id="temp-1">Temp: <span id="temp"></span> &deg;F</p>
-                                        <p id="wind-1">Wind: <span id="wind"></span> MPH</p>
-                                        <p id="humidity-1">Humidity: <span id="humidity"></span> &percnt;</p>
-                                     </div>
-                                     <div id="day-2" class="card mycard">
-                                        <p id="date-2"></p>
-                                        <span id="icon-2"></span>
-                                        <p id="temp-2">Temp: <span id="temp"></span> &deg;F</p>
-                                        <p id="wind-2">Wind: <span id="wind"></span> MPH</p>
-                                        <p id="humidity-2">Humidity: <span id="humidity"></span> &percnt;</p>
-                                     </div>
-                                     <div id="day-3" class="card mycard">
-                                        <p id="date-3"></p>
-                                        <span id="icon-3"></span>
-                                        <p id="temp-3">Temp: <span id="temp"></span> &deg;F</p>
-                                        <p id="wind-3">Wind: <span id="wind"></span> MPH</p>
-                                        <p id="humidity-3">Humidity: <span id="humidity"></span> &percnt;</p>
-                                     </div>
-                                     <div id="day-4" class="card mycard">
-                                        <p id="date-4"></p>
-                                        <span id="icon-4"></span>
-                                        <p id="temp-4">Temp: <span id="temp"></span> &deg;F</p>
-                                        <p id="wind-4">Wind: <span id="wind"></span> MPH</p>
-                                        <p id="humidity-4">Humidity: <span id="humidity"></span> &percnt;</p>
-                                     </div>
-                                     <div id="day-5" class="card mycard">
-                                        <p id="date-5"></p>
-                                        <span id="icon-5"></span>
-                                        <p id="temp-5">Temp: <span id="temp"></span> &deg;F</p>
-                                        <p id="wind-5">Wind: <span id="wind"></span> MPH</p>
-                                        <p id="humidity-5">Humidity: <span id="humidity"></span> &percnt;</p>
-                                     </div> -->
-                                </div>
+                                <div class="row w-100" id="forecast"></div>
+                            </div>
+                        </div>
                     </div>
-                    
                 </div>
             </div>
 
@@ -103,7 +72,7 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"
-      ></script>
+        ></script>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script
           src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"

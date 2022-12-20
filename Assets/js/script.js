@@ -9,10 +9,8 @@ function init() {
     var citylist = JSON.parse(localStorage.getItem("wddata"));
     if (citylist !== null ) {
 		writeCities(citylist);
-		console.log(citylist.length);
 		i = citylist.length - 1
 		citydata = citylist[i];
-		console.log(citydata);
 		city = citydata[0];
 		lat = citydata[1];
 		lon = citydata[2];
@@ -76,20 +74,21 @@ var getWeather = function (city, lat, lon) {
 		.then(function (response) {
 			if (response.ok) {
 				response.json().then(function (data) {
-					console.log(data);
+					today = dayjs().format('M/D/YYYY')
 					humidity = data.current.humidity;
 					temp = data.current.temp;
 					wind = data.current.wind_speed;
 					icon = data.current.weather[0].icon;
 					iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-					iconEl = '<img src="' + iconUrl + '" alt="weather condition icon">'
-					$('#city').text(city);
+					iconEl = '<img src="' + iconUrl + '" alt="weather condition icon" id="icon">'
+					$('#city').text(city + "(" + today + ")");
 					$('#icon0').append(iconEl);
 					$('#wind').text(wind);
 					$('#temp').text(temp);
 					$('#humidity').text(humidity);
 
 					for (i = 1; i < 6; i++) {
+						result = dayjs().add(i, 'day').format('M/D/YYYY');
 						humidityd = data.daily[i].humidity;
 						tempd = data.daily[i].temp.max;
 						windd = data.daily[i].wind_speed;
@@ -100,7 +99,9 @@ var getWeather = function (city, lat, lon) {
 						cardEl.classList = "card mycard";
 						cardEl.setAttribute("id", "day-" + i);
 						
-						// var dateEl = 
+						var dateEl = document.createElement('p');
+						dateEl.textContent = result;
+						
 						var iconEld = document.createElement('img');
 						iconEld.setAttribute("src", iconUrld)
 						iconEld.setAttribute("alt", "weather condition icon")
@@ -118,6 +119,7 @@ var getWeather = function (city, lat, lon) {
 						humidityEld.textContent = "Humidity: " + humidityd + " %;";
 
 						forecastEl.appendChild(cardEl);
+						cardEl.appendChild(dateEl);
 						cardEl.appendChild(iconEld);
 						cardEl.appendChild(tempEld);
 						cardEl.appendChild(windEld);
@@ -138,6 +140,30 @@ var getWeather = function (city, lat, lon) {
 formEl.addEventListener("submit", formSubmitHandler);
 
 // event listener for clicking on a city
-// cityAreaEl.addEventListener('click', '.cityButton', getWeather);
+cityAreaEl.addEventListener('click', function(event) {
+	var element = event.target;
+
+	if (element.matches("button") === true) {
+		var index = element.getAttribute("id");
+		var selection = index.slice(-1);
+		locdata = JSON.parse(localStorage.getItem("wddata"));
+		var temp = locdata[selection];
+		city = temp[0];
+		lat = temp[1];
+		lon = temp[2];
+		// remove dynamically generated elements from the DOM
+		var element = document.querySelectorAll('.mycard');
+		element.forEach(mycard => {
+			mycard.remove();
+		});
+
+		element = document.querySelectorAll('#icon');
+		element.forEach(icon => {
+			icon.remove();
+		});
+	}
+	
+	getWeather(city, lat, lon);
+});
 
 init();
